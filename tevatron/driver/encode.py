@@ -196,7 +196,7 @@ def main():
 
         offset += batch_size
 
-    output_dir = '/'.join( (data_args.encoded_save_path).split('/')[:-1] ) 
+    output_dir = os.path.join( (data_args.encoded_save_path).split(os.sep)[:-1] ) 
     if not os.path.exists(output_dir):
         logger.info(f'{output_dir} not exists, create')
         os.mkdir(output_dir)
