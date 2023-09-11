@@ -1,9 +1,9 @@
 from datasets import load_dataset
 from transformers import PreTrainedTokenizer
-from .preprocessor import TrainPreProcessor, QueryPreProcessor, CorpusPreProcessor, EvalPreProcessor
+from .preprocessor import NewTrainPreProcessor, TrainPreProcessor, QueryPreProcessor, CorpusPreProcessor, EvalPreProcessor
 from ..arguments import DataArguments
 
-DEFAULT_PROCESSORS = [TrainPreProcessor, QueryPreProcessor, CorpusPreProcessor, EvalPreProcessor]
+DEFAULT_PROCESSORS = [NewTrainPreProcessor, QueryPreProcessor, CorpusPreProcessor, EvalPreProcessor]
 PROCESSOR_INFO = {
     'Tevatron/wikipedia-nq': DEFAULT_PROCESSORS,
     'Tevatron/wikipedia-trivia': DEFAULT_PROCESSORS,

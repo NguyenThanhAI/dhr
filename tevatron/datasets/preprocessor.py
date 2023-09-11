@@ -25,7 +25,29 @@ class TrainPreProcessor:
                                                    max_length=self.text_max_length,
                                                    truncation=True))
         return {'query': query, 'positives': positives, 'negatives': negatives}
+    
+class NewTrainPreProcessor:
+    def __init__(self, tokenizer, query_max_length=32, text_max_length=256, separator=' '):
+        self.tokenizer = tokenizer
+        self.query_max_length = query_max_length
+        self.text_max_length = text_max_length
+        self.separator = separator
 
+    def __call__(self, example):
+        query = self.tokenizer.encode(example['query'],
+                                      add_special_tokens=False,
+                                      max_length=self.query_max_length,
+                                      truncation=True)
+        
+        positives = []
+        for pos in example['positive_passages']:
+            positives.append(pos["docid"])
+            
+        negatives = []
+        for neg in example['negative_passages']:
+            negatives.append(neg["docid"])
+            
+        return {"query": query, "positive_pids": positives, "negative_pids": negatives}
 
 class QueryPreProcessor:
     def __init__(self, tokenizer, query_max_length=32):
